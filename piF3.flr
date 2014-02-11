@@ -1,0 +1,18 @@
+?x:rjecnik[%dodaj(?prvi,?drugi)]:-
+	naf(?x:rjecnik[?prvi->?_]),
+	t_insert{?x[?prvi->?drugi]}.
+
+
+
+?x:rjecnik[%brisi(?sto)]:-
+	t_delete{?x[?sto->?_]}.
+
+
+?x:rjecnik[%azuriraj(?prvi,?drugi)]:-
+	?x:rjecnik[?prvi->?_],
+	?x:rjecnik[%brisi(?prvi)],
+	t_insert{?x[?prvi->?drugi]}.
+
+
+?x:rjecnik[%prikazi(?sto)]:-
+	?sto = collectset{?y|?x[?prvi->?drugi],?y=r(?prvi,?drugi)}.

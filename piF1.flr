@@ -1,0 +1,33 @@
+hodnik[vrata->'dnevni boravak', vrata->'spavaca soba'].
+'spavaca soba'[vrata->kupaona].
+'dnevni boravak'[vrata->kuhinja].
+kuhinja[sadrzi->pizza].
+
+igrac[pozicija->hodnik].
+
+
+//insertrule{?x[vrata->?soba]:-?soba[vrata->?x]}.
+
+?x[vrata->?soba]:-?soba[vrata->?x].
+
+
+
+put(?soba1,?soba2):-
+	?soba1[vrata->?soba2].
+put(?soba1,?soba2):-
+	?soba1[vrata->?soba3],
+	put(?soba3, ?soba2).
+
+
+igrac[idi(?gdje)]:-
+	igrac[pozicija->?sada],
+	put(?sada,?gdje),
+	delete{igrac[pozicija->?_]},
+	insert{igrac[pozicija->?gdje]}.
+
+
+igrac[uzmi(?sto)]:-
+	igrac[pozicija->?g],
+	?g[sadrzi->?sto],
+	delete{?g[sadrzi->?sto]},
+	insert{igrac[ima->?sto]}.

@@ -1,0 +1,16 @@
+?- [piF21>>s1].
+?- [piF21>>s2].
+
+?- insert{B[k->s1]@s1}.
+?- delete{I(p1)@s1}.
+
+
+percipira(?agent,?svijet,?svijetovi):-
+	?svijetovi = collectset{?s|?agent[k->?s]@?svijet}.
+
+
+zna(?agent,?propozicija,?svijet):-
+	?agent[k->?_]@?svijet,
+	I(?propozicija)@?svijet.
+
+
